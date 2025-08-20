@@ -14,7 +14,7 @@ class FontSizeSwitcherPlugin implements Plugin
 
     protected bool $showInTopbar = true;
 
-    protected string $position = 'right';
+    protected string $position = 'left';
 
     public function getId(): string
     {
@@ -24,7 +24,7 @@ class FontSizeSwitcherPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->renderHook(
-            'panels::topbar.end',
+            'panels::global-search.before',
             fn (): string => $this->showInTopbar ? View::make('font-size-switcher::font-size-switcher', [
                 'fontSizes' => $this->getFontSizes(),
                 'defaultSize' => $this->defaultSize,
