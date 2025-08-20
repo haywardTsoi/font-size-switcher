@@ -1,0 +1,137 @@
+/* Filament Font Size Switcher Styles */
+.filament-font-size-switcher {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    margin-left: 12px;
+    padding: 4px;
+    background: rgb(255 255 255 / 0.05);
+    border-radius: 6px;
+    border: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.filament-font-size-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.05);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    color: rgb(156 163 175);
+    position: relative;
+}
+
+.filament-font-size-btn[data-size="xs"] .font-size-label {
+    font-size: 10px;
+}
+
+.filament-font-size-btn[data-size="sm"] .font-size-label {
+    font-size: 11px;
+}
+
+.filament-font-size-btn[data-size="md"] .font-size-label {
+    font-size: 13px;
+}
+
+.filament-font-size-btn[data-size="lg"] .font-size-label {
+    font-size: 15px;
+}
+
+.filament-font-size-btn[data-size="xl"] .font-size-label {
+    font-size: 17px;
+}
+
+.filament-font-size-btn:hover {
+    background: rgb(255 255 255 / 0.1);
+    border-color: rgb(255 255 255 / 0.2);
+    color: rgb(209 213 219);
+}
+
+.filament-font-size-btn.active {
+    background: rgb(34 197 94);
+    color: white;
+    border-color: rgb(34 197 94);
+}
+
+/* Font size application classes */
+.filament-font-xs {
+    font-size: 0.8rem !important;
+}
+
+.filament-font-xs * {
+    font-size: inherit !important;
+}
+
+.filament-font-sm {
+    font-size: 0.875rem !important;
+}
+
+.filament-font-sm * {
+    font-size: inherit !important;
+}
+
+.filament-font-md {
+    font-size: 1rem !important;
+}
+
+.filament-font-md * {
+    font-size: inherit !important;
+}
+
+.filament-font-lg {
+    font-size: 1.125rem !important;
+}
+
+.filament-font-lg * {
+    font-size: inherit !important;
+}
+
+.filament-font-xl {
+    font-size: 1.25rem !important;
+}
+
+.filament-font-xl * {
+    font-size: inherit !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filament-font-size-switcher {
+        gap: 2px;
+        padding: 3px;
+    }
+    
+    .filament-font-size-btn {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Dark mode styles */
+.dark .filament-font-size-switcher {
+    background: rgb(0 0 0 / 0.1);
+    border-color: rgb(0 0 0 / 0.2);
+}
+
+.dark .filament-font-size-btn {
+    background: rgb(0 0 0 / 0.1);
+    border-color: rgb(0 0 0 / 0.2);
+    color: rgb(156 163 175);
+}
+
+.dark .filament-font-size-btn:hover {
+    background: rgb(0 0 0 / 0.2);
+    border-color: rgb(0 0 0 / 0.3);
+    color: rgb(209 213 219);
+}
+
+.dark .filament-font-size-btn.active {
+    background: rgb(34 197 94);
+    color: white;
+    border-color: rgb(34 197 94);
+}

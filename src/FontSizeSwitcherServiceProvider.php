@@ -2,7 +2,6 @@
 
 namespace Solutionforest\FontSizeSwitcher;
 
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
@@ -10,11 +9,11 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
+use Solutionforest\FontSizeSwitcher\Commands\FontSizeSwitcherCommand;
+use Solutionforest\FontSizeSwitcher\Testing\TestsFontSizeSwitcher;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Solutionforest\FontSizeSwitcher\Commands\FontSizeSwitcherCommand;
-use Solutionforest\FontSizeSwitcher\Testing\TestsFontSizeSwitcher;
 
 class FontSizeSwitcherServiceProvider extends PackageServiceProvider
 {
@@ -100,9 +99,8 @@ class FontSizeSwitcherServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('font-size-switcher', __DIR__ . '/../resources/dist/components/font-size-switcher.js'),
-            // Css::make('font-size-switcher-styles', __DIR__ . '/../resources/dist/font-size-switcher.css'),
-            // Js::make('font-size-switcher-scripts', __DIR__ . '/../resources/dist/font-size-switcher.js'),
+            // Css::make('font-size-switcher-styles', __DIR__ . '/../resources/css/font-size-switcher.css'),
+            // Js::make('font-size-switcher-scripts', __DIR__ . '/../resources/js/font-size-switcher.js'),
         ];
     }
 

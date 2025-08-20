@@ -4,9 +4,18 @@ namespace Solutionforest\FontSizeSwitcher;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Illuminate\Support\Facades\View;
 
 class FontSizeSwitcherPlugin implements Plugin
 {
+    protected array $fontSizes = [];
+
+    protected string $defaultSize = 'md';
+
+    protected bool $showInTopbar = true;
+
+    protected string $position = 'right';
+
     public function getId(): string
     {
         return 'font-size-switcher';
@@ -14,7 +23,14 @@ class FontSizeSwitcherPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        //
+        $panel->renderHook(
+            'panels::topbar.end',
+            fn (): string => $this->showInTopbar ? View::make('font-size-switcher::font-size-switcher', [
+                'fontSizes' => $this->getFontSizes(),
+                'defaultSize' => $this->defaultSize,
+                'position' => $this->position,
+            ])->render() : ''
+        );
     }
 
     public function boot(Panel $panel): void
@@ -22,16 +38,82 @@ class FontSizeSwitcherPlugin implements Plugin
         //
     }
 
+    public function xs(float $scale): static
+    {
+        $this->fontSizes['xs'] = $scale;
+
+        return $this;
+    }
+
+    public function sm(float $scale): static
+    {
+        $this->fontSizes['sm'] = $scale;
+
+        return $this;
+    }
+
+    public function md(float $scale): static
+    {
+        $this->fontSizes['md'] = $scale;
+
+        return $this;
+    }
+
+    public function lg(float $scale): static
+    {
+        $this->fontSizes['lg'] = $scale;
+
+        return $this;
+    }
+
+    public function xl(float $scale): static
+    {
+        $this->fontSizes['xl'] = $scale;
+
+        return $this;
+    }
+
+    public function defaultSize(string $size): static
+    {
+        $this->defaultSize = $size;
+
+        return $this;
+    }
+
+    public function position(string $position): static
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function showInTopbar(bool $show = true): static
+    {
+        $this->showInTopbar = $show;
+
+        return $this;
+    }
+
+    public function getFontSizes(): array
+    {
+        if (empty($this->fontSizes)) {
+            return [
+                'sm' => 0.875,
+                'md' => 1.0,
+                'lg' => 0.5,
+            ];
+        }
+
+        return $this->fontSizes;
+    }
+
     public static function make(): static
     {
-        return app(static::class);
+        return new static;
     }
 
     public static function get(): static
     {
-        /** @var static $plugin */
-        $plugin = filament(app(static::class)->getId());
-
-        return $plugin;
+        return new static;
     }
 }
