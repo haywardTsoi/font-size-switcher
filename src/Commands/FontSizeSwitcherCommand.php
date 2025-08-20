@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Solutionforest\FontSizeSwitcher\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FontSizeSwitcherCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'font-size-switcher';
 
     public $description = 'My command';
 

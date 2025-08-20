@@ -1,30 +1,28 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "solutionforest/font-size-switcher",
+    "description": "This is my package font-size-switcher",
     "keywords": [
-        ":vendor_name",
+        "Solutionforest",
         "laravel",
         "filamentphp",
-        ":package_slug"
+        "font-size-switcher"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/solutionforest/font-size-switcher",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/solutionforest/font-size-switcher/issues",
+        "source": "https://github.com/solutionforest/font-size-switcher"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "haywardtsoi",
+            "email": "hayward.tsoi@solutionforest",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
         "filament/filament": "^4.0",
-        "filament/forms": "^4.0",
-        "filament/tables": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -44,13 +42,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Solutionforest\\FontSizeSwitcher\\": "src/",
+            "Solutionforest\\FontSizeSwitcher\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Solutionforest\\FontSizeSwitcher\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -65,10 +63,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Solutionforest\\FontSizeSwitcher\\FontSizeSwitcherServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FontSizeSwitcher": "Solutionforest\\FontSizeSwitcher\\Facades\\FontSizeSwitcher"
             }
         }
     },
