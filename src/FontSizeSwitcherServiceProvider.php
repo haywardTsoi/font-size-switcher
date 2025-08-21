@@ -105,14 +105,14 @@ class FontSizeSwitcherServiceProvider extends PackageServiceProvider
         //     );
         // });
         \Filament\Facades\Filament::serving(function () {
-        // 檢查是否有 plugin 配置
-        if (app()->bound('font-size-switcher.plugin-registered')) {
-            \Filament\Facades\Filament::registerRenderHook(
-                \Filament\View\PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): string => $this->renderFontSizeControl()
-            );
-        }
-    });
+            // 檢查是否有 plugin 配置
+            if (app()->bound('font-size-switcher.plugin-registered')) {
+                \Filament\Facades\Filament::registerRenderHook(
+                    \Filament\View\PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                    fn (): string => $this->renderFontSizeControl()
+                );
+            }
+        });
 
         // Testing
         Testable::mixin(new TestsFontSizeSwitcher);
