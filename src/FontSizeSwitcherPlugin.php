@@ -71,10 +71,17 @@ class FontSizeSwitcherPlugin implements Plugin
     public function register(Panel $panel): void
     {
         // 將配置數據存儲到容器中，供 ServiceProvider 使用
-        app()->instance('font-size-switcher.config', [
-            'fontSizes' => $this->getFontSizes(),
-            'defaultSize' => $this->defaultSize,
-        ]);
+        // app()->instance('font-size-switcher.config', [
+        //     'fontSizes' => $this->getFontSizes(),
+        //     'defaultSize' => $this->defaultSize,
+        // ]);
+        app()->instance('font-size-switcher.plugin-registered', true);
+    
+    // 註冊配置
+    app()->instance('font-size-switcher.config', [
+        'fontSizes' => $this->fontSizes,
+        'defaultSize' => $this->defaultSize,
+    ]);
     }
 
     public function boot(Panel $panel): void
