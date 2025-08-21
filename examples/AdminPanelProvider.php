@@ -58,20 +58,16 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 // Font Size Switcher Plugin - 基本配置
                 FontSizeSwitcherPlugin::make()
-                    ->xs(0.8)
-                    ->md(1)
-                    ->lg(1.2),
+                    ->small(0.8)
+                    ->normal(1.0)
+                    ->large(1.2),
 
                 // 或者使用完整配置
                 // FontSizeSwitcherPlugin::make()
-                //     ->xs(0.8)
-                //     ->sm(0.875)
-                //     ->md(1.0)
-                //     ->lg(1.125)
-                //     ->xl(1.25)
-                //     ->defaultSize('md')
-                //     ->showInTopbar(true)
-                //     ->position('right'),
+                //     ->small(0.8)
+                //     ->normal(1.0)
+                //     ->large(1.2)
+                //     ->defaultSize('normal'),
             ]);
     }
 }

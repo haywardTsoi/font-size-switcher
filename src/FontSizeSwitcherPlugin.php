@@ -4,71 +4,41 @@ namespace Solutionforest\FontSizeSwitcher;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Illuminate\Support\Facades\View;
 
 class FontSizeSwitcherPlugin implements Plugin
 {
     protected array $fontSizes = [];
 
-    protected string $defaultSize = 'md';
-
-    protected bool $showInTopbar = true;
-
-    protected string $position = 'left';
+    protected string $defaultSize = 'normal';
 
     public function getId(): string
     {
         return 'font-size-switcher';
     }
 
-    public function register(Panel $panel): void
+    public static function make(): static
     {
-        $panel->renderHook(
-            'panels::global-search.before',
-            fn (): string => $this->showInTopbar ? View::make('font-size-switcher::font-size-switcher', [
-                'fontSizes' => $this->getFontSizes(),
-                'defaultSize' => $this->defaultSize,
-                'position' => $this->position,
-            ])->render() : ''
-        );
+        return new static;
     }
 
-    public function boot(Panel $panel): void
+    public function small(float $multiplier): static
     {
-        //
-    }
-
-    public function xs(float $scale): static
-    {
-        $this->fontSizes['xs'] = $scale;
+        $this->fontSizes['small'] = $multiplier;
 
         return $this;
     }
 
-    public function sm(float $scale): static
+    public function normal(float $multiplier): static
     {
-        $this->fontSizes['sm'] = $scale;
+        $this->fontSizes['normal'] = $multiplier;
+        $this->defaultSize = 'normal';
 
         return $this;
     }
 
-    public function md(float $scale): static
+    public function large(float $multiplier): static
     {
-        $this->fontSizes['md'] = $scale;
-
-        return $this;
-    }
-
-    public function lg(float $scale): static
-    {
-        $this->fontSizes['lg'] = $scale;
-
-        return $this;
-    }
-
-    public function xl(float $scale): static
-    {
-        $this->fontSizes['xl'] = $scale;
+        $this->fontSizes['large'] = $multiplier;
 
         return $this;
     }
@@ -80,36 +50,36 @@ class FontSizeSwitcherPlugin implements Plugin
         return $this;
     }
 
-    public function position(string $position): static
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    public function showInTopbar(bool $show = true): static
-    {
-        $this->showInTopbar = $show;
-
-        return $this;
-    }
-
     public function getFontSizes(): array
     {
         if (empty($this->fontSizes)) {
             return [
-                'sm' => 0.875,
-                'md' => 1.0,
-                'lg' => 0.5,
+                'small' => 0.8,
+                'normal' => 1.0,
+                'large' => 1.2,
             ];
         }
 
         return $this->fontSizes;
     }
 
-    public static function make(): static
+    public function getDefaultSize(): string
     {
-        return new static;
+        return $this->defaultSize;
+    }
+
+    public function register(Panel $panel): void
+    {
+        // 將配置數據存儲到容器中，供 ServiceProvider 使用
+        app()->instance('font-size-switcher.config', [
+            'fontSizes' => $this->getFontSizes(),
+            'defaultSize' => $this->defaultSize,
+        ]);
+    }
+
+    public function boot(Panel $panel): void
+    {
+        //
     }
 
     public static function get(): static

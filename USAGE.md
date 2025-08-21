@@ -10,6 +10,12 @@
 composer require solutionforest/font-size-switcher
 ```
 
+發布 assets:
+
+```bash
+php artisan vendor:publish --tag=font-size-switcher-assets
+```
+
 ## 使用方法
 
 在你的 Filament Panel Provider 中註冊插件:
@@ -23,9 +29,9 @@ public function panel(Panel $panel): Panel
         // ... 其他配置
         ->plugins([
             FontSizeSwitcherPlugin::make()
-                ->xs(0.8)
-                ->md(1)
-                ->lg(1.2),
+                ->small(0.8)
+                ->normal(1.0)
+                ->large(1.2),
         ]);
 }
 ```
@@ -36,35 +42,19 @@ public function panel(Panel $panel): Panel
 
 ```php
 FontSizeSwitcherPlugin::make()
-    ->xs(0.8)      // 特小字體 (80%)
-    ->sm(0.875)    // 小字體 (87.5%)
-    ->md(1.0)      // 中等字體 (100% - 默認)
-    ->lg(1.125)    // 大字體 (112.5%)
-    ->xl(1.25)     // 特大字體 (125%)
+    ->small(0.8)      // 小字體 (80%)
+    ->normal(1.0)     // 正常字體 (100% - 默認)
+    ->large(1.2)      // 大字體 (120%)
 ```
 
 ### 自定義默認大小
 
 ```php
 FontSizeSwitcherPlugin::make()
-    ->xs(0.8)
-    ->md(1)
-    ->lg(1.2)
-    ->defaultSize('md') // 設置默認字體大小
-```
-
-### 位置設置
-
-```php
-FontSizeSwitcherPlugin::make()
-    ->position('right') // 'left' 或 'right'
-```
-
-### 顯示/隱藏控制
-
-```php
-FontSizeSwitcherPlugin::make()
-    ->showInTopbar(true) // true 或 false
+    ->small(0.8)
+    ->normal(1.0)
+    ->large(1.2)
+    ->defaultSize('normal') // 設置默認字體大小
 ```
 
 ## 完整示例
@@ -80,25 +70,22 @@ public function panel(Panel $panel): Panel
         ->login()
         ->plugins([
             FontSizeSwitcherPlugin::make()
-                ->xs(0.8)
-                ->sm(0.9)
-                ->md(1.0)
-                ->lg(1.1)
-                ->xl(1.2)
-                ->defaultSize('md')
-                ->showInTopbar(true)
-                ->position('right'),
+                ->small(0.8)
+                ->normal(1.0)
+                ->large(1.2)
+                ->defaultSize('normal'),
         ]);
 }
 ```
 
 ## 功能特點
 
+- ✅ 顯示在全局搜索框之前 (`panels::global-search.before`)
 - ✅ 響應式設計，適配桌面和移動設備
 - ✅ 支持 Filament 的深色模式
 - ✅ 自動保存用戶選擇的字體大小到 localStorage
 - ✅ 支持自定義字體大小比例
-- ✅ 集成到 Filament 頂部導航欄
+- ✅ 分離的 CSS/JS 文件
 - ✅ 易於配置和使用
 
 ## 瀏覽器支持

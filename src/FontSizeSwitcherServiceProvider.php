@@ -57,7 +57,14 @@ class FontSizeSwitcherServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void {}
+    public function packageRegistered(): void
+    {
+        // 註冊默認配置
+        app()->instance('font-size-switcher.config', [
+            'fontSizes' => ['small' => 0.8, 'normal' => 1.0, 'large' => 1.2],
+            'defaultSize' => 'normal',
+        ]);
+    }
 
     public function packageBooted(): void
     {
@@ -84,8 +91,32 @@ class FontSizeSwitcherServiceProvider extends PackageServiceProvider
             }
         }
 
+        // 發布 assets
+        $this->publishes([
+            __DIR__ . '/../resources/css' => public_path('vendor/font-size-switcher/css'),
+            __DIR__ . '/../resources/js' => public_path('vendor/font-size-switcher/js'),
+        ], 'font-size-switcher-assets');
+
+        // 註冊 render hook
+        \Filament\Facades\Filament::serving(function () {
+            \Filament\Facades\Filament::registerRenderHook(
+                \Filament\View\PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): string => $this->renderFontSizeControl()
+            );
+        });
+
         // Testing
         Testable::mixin(new TestsFontSizeSwitcher);
+    }
+
+    private function renderFontSizeControl(): string
+    {
+        $config = app('font-size-switcher.config');
+
+        return \Illuminate\Support\Facades\Blade::render('font-size-switcher::font-size-control', [
+            'fontSizes' => $config['fontSizes'],
+            'defaultSize' => $config['defaultSize'],
+        ]);
     }
 
     protected function getAssetPackageName(): ?string
